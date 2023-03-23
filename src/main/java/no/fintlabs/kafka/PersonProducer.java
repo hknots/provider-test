@@ -18,13 +18,22 @@ public class PersonProducer {
 
     public void send(Person person) {
         // Lag en EntityTopicNameParameters
-
+        EntityTopicNameParameters entityTopicNameParameters = EntityTopicNameParameters
+                .builder()
+                .orgId("fintlabs-no")
+                .domainContext("fint-core")
+                .resource("person")
+                .build();
 
         // Lag en EntityProducerRecord av Person
-
+        EntityProducerRecord<Person> entityProducerRecord = EntityProducerRecord
+                .<Person>builder()
+                .topicNameParameters(entityTopicNameParameters)
+                .value(person)
+                .build();
 
         // Send entityProducerRecord
-
+        entityProducer.send(entityProducerRecord);
     }
 
 }
