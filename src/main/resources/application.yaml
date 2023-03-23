@@ -1,6 +1,22 @@
+server:
+  port : 8080
+
+fint:
+  kafka:
+    application-id: provider
+    enable-ssl: false
+    default-replicas: 1
+
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://idp.felleskomponent.no/nidp/oauth/nam
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: provider
+  webflux:
+    base-path: /provider
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
